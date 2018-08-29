@@ -12,8 +12,12 @@ class OperationJson:
             data=json.load(fp)
         return data
     #根据关键字获取数据
-    def get_data(self,key):
+    def get_data_json(self,key):
         return self.data[key]
+    #写json
+    def write_data(self,data):
+        with open('../dataconfig/passwd.json') as fp:
+            fp.write(json.dumps(data))
 if __name__=="__main__":
     ui=OperationJson()
     value=ui.get_data('user')

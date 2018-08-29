@@ -33,7 +33,7 @@ class MyTest(unittest.TestCase):
             self.header=None
         else:
             ui = OperationJson()
-            self.header=ui.get_data(self.header)
+            self.header=ui.get_data_json(self.header)
             self.data=json.dumps(self.data)
         run_method = RunMethod()
         api=run_method.run_main(method=data_test['method'],url=data_test['url'],data=data_test['data'],headers=data_test['headers'])
