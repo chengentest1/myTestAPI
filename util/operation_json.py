@@ -19,6 +19,6 @@ class OperationJson:
         with open('../dataconfig/passwd.json') as fp:
             fp.write(json.dumps(data))
 if __name__=="__main__":
-    ui=OperationJson()
-    value=ui.get_data('user')
+    ui=OperationJson('../dataconfig/passwd.json')
+    value=ui.get_data_json('headers')
     print(value)
