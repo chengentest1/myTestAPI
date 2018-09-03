@@ -7,6 +7,7 @@ class RunMethod:
             res=requests.post(url=url,data=data,headers=headers)
         else:
             res=requests.post(url=url,data=data)
+
         return res.json()
     def request_get(self,url,data=None,headers=None):
         res=None

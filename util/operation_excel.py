@@ -1,6 +1,8 @@
+import sys
 import xlrd
+from xlutils.copy import copy
 
-
+sys.path.append('..')
 class OperationExcel:
     def __init__(self,file_name=None,sheet_id=0):
         if file_name:
@@ -10,6 +12,7 @@ class OperationExcel:
             self.file_name='../dataconfig/case.xlsx'
             self.sheet_id=sheet_id
         self.data=self.get_data()
+        self.path='../dataconfig/case.xls'
     #获取sheet的内容
     def get_data(self):
         data=xlrd.open_workbook(self.file_name)
@@ -51,3 +54,16 @@ class OperationExcel:
         row_num=self.get_row_num(case_id)
         rows_data=self.get_row_values(row_num)
         return rows_data
+    #写入数据
+    def write_value(self,row,col,value,sheet_id=0):
+        read_data=xlrd.open_workbook(self.path)
+        write_data=copy(read_data)
+        sheet_data=write_data.get_sheet(sheet_id)
+        sheet_data.write(row,col,value)
+        write_data.save(self.path)
+
+
+
+
+# if __name__=="__main__":
+#     OperationExcel().write_value(1,8,'32324')

@@ -15,6 +15,8 @@ data_test=getExcelData()
 class MyTest(unittest.TestCase):
     def setUp(self):
         print('测试用例开始')
+        self.write=OperationExcel()
+
 
     def tearDown(self):
         use=user()
@@ -22,6 +24,7 @@ class MyTest(unittest.TestCase):
         print('测试用例结束')
     @ddt.data(*data_test)
     def test_api(self,data_case):
+
         self.id=data_case["id"]
         self.casename=data_case["casename"]
         self.url=data_case['url']
@@ -46,11 +49,22 @@ class MyTest(unittest.TestCase):
             self.data=ui.get_data_json(self.data)
         run_method = RunMethod()
         # # print(self.method,self.url,self.data,self.header)
-        try:
-            api=run_method.run_main(method=self.method,url=self.url,data=self.data,headers=self.header)
-        except Exception as e:
-            pass
-        print(api)
+
+        api=run_method.run_main(method=self.method,url=self.url,data=self.data,headers=self.header)
+        self.reslut=api.get('code')
+        if self.expect==self.reslut:
+            self.write.write_value(int(self.id),9,'ture')
+            self.write.write_value(int(self.id),8,self.reslut)
+            print(self.expect,self.reslut)
+        else:
+            self.write.write_value(int(self.id), 9, 'flase')
+            self.write.write_value(int(self.id), 8, self.reslut)
+            print(self.expect, self.reslut)
+
+
+
+
+
         # print(self.method,self.casename,self.url,self.id)
 if __name__=="__main__":
     unittest.main()

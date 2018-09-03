@@ -1,7 +1,8 @@
 from util.operation_excel import OperationExcel
 
-def getExcelData():
-    opera=OperationExcel()
+def getExcelData(file_name=None,sheet_id=0):
+
+    opera=OperationExcel(file_name,sheet_id)
     rows=opera.get_lines()
     make_data=[]
     for i in range(1,rows):
@@ -15,7 +16,7 @@ def getExcelData():
         expect=opera.get_cell_value(i,7)
         reslut=opera.get_cell_value(i,8)
         stuta=opera.get_cell_value(i,9)
-        is_dependent=opera.get_lines(i,10)
+        is_dependent=opera.get_cell_value(i,10)
         dependent_id=opera.get_cell_value(i,11)
         dependent_name=opera.get_cell_value(i,12)
 
@@ -24,3 +25,13 @@ def getExcelData():
                           "dependent_id":dependent_id,"dependent_name":dependent_name})
     return make_data
 
+
+
+
+
+
+# def write_excel(row,col,value,sheet_id=0):
+#     opera = OperationExcel()
+#     opera.write_value(row,col,value,sheet_id=0)
+#
+# write_excel(1,8,'1009')
